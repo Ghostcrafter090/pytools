@@ -1161,6 +1161,20 @@ class clock:
         out = out + (dateArray[2] * 24 * 60 * 60) + (dateArray[3] * 60 * 60) + (dateArray[4] * 60) + dateArray[5]
         return out
 
+    def UTCtoDateArray(utc):
+        year = int(utc / 31536000)
+        n = (utc - (year * 31536000)) / (60 * 60 * 24)
+        i = 1
+        while n > 31:
+            n = n - clock.getMonthEnd(i)
+            i = i + 1
+        month = i
+        day = int(n)
+        hour = (n - day) * 24
+        minute = (hour - int(hour)) * 60
+        second = (minute - int(minute)) * 60
+        return [int(year), int(month), int(day), int(hour), int(minute), int(second), 0]
+
 # Dummy function, used for doing dumb stuff and detecting malformed error'd data.
 def dummy(*args):
     if args[0] == args[0]:
