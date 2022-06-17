@@ -157,7 +157,7 @@ class IO:
         error = 0
         try:
             file = open(path, "w")
-            file.write(ET.tostring(xml).decode('UTF-8'))
+            file.write(ET.tostring(xml).decode('UTF-8').replace("ns0:", "").replace(":ns0", ""))
             file.close()
         except:
             print("Unexpected error:", sys.exc_info())
