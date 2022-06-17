@@ -1,0 +1,13 @@
+<ns0:actors xmlns:ns0="http://people.example.com" xmlns:ns1="http://characters.example.com">
+    <ns0:actor>
+        <ns0:name>fuck</ns0:name>
+        <ns1:character>Lancelot</ns1:character>
+        <ns1:character>Archie Leach</ns1:character>
+    </ns0:actor>
+    <ns0:actor>
+        <ns0:name>Eric Idle</ns0:name>
+        <ns1:character>Sir Robin</ns1:character>
+        <ns1:character>Gunther</ns1:character>
+        <ns1:character>Commander Clement</ns1:character>
+    </ns0:actor>
+</ns0:actors>

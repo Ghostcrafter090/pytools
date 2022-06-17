@@ -2,33 +2,105 @@
 # A python library by Ghostcrafter090 for making my and your life less confusing!
 # Use it in whatever you wish, just make sure to credit me for this code ;)
 
-import json
-import os
-import sys
-from win32api import GetModuleHandle, PostQuitMessage
-import win32con
-from win32gui import NIF_ICON, NIF_INFO, NIF_MESSAGE, NIF_TIP, NIM_ADD, NIM_DELETE, NIM_MODIFY, WNDCLASS, CreateWindow, DestroyWindow, LoadIcon, LoadImage, RegisterClass, Shell_NotifyIcon, UpdateWindow
-import psutil
-import ssl
-import smtplib
-import urllib
-from PIL import Image
-from PIL import ImageColor
-import subprocess
-import requests
-from io import BytesIO
-from urllib.request import urlopen
-from datetime import datetime
-import ctypes
-from bs4 import BeautifulSoup
-import math as mather
-import threading
-from suntime import Sun
-import datetime as dater
-from ctypes import *
-import zipfile
-import shutil
-import pickle
+class check:
+    cond = False
+
+try:
+    import json
+    import os
+    import sys
+    from win32api import GetModuleHandle, PostQuitMessage
+    import win32con
+    from win32gui import NIF_ICON, NIF_INFO, NIF_MESSAGE, NIF_TIP, NIM_ADD, NIM_DELETE, NIM_MODIFY, WNDCLASS, CreateWindow, DestroyWindow, LoadIcon, LoadImage, RegisterClass, Shell_NotifyIcon, UpdateWindow
+    import psutil
+    import ssl
+    import smtplib
+    import urllib
+    from PIL import Image
+    from PIL import ImageColor
+    import subprocess
+    import requests
+    from io import BytesIO
+    from urllib.request import urlopen
+    from datetime import datetime
+    import ctypes
+    from bs4 import BeautifulSoup
+    import math as mather
+    import threading
+    from suntime import Sun
+    import datetime as dater
+    from ctypes import *
+    import zipfile
+    import shutil
+    import pickle
+    import xml.etree.ElementTree as ET
+except:
+    import os
+    import sys
+    print("Unexpected error:", sys.exc_info())
+
+    importArray = [
+        ['win32api', "py -m pip install pywin32"],
+        ['win32con', "py -m pip install pywin32"],
+        ['win32gui', "py -m pip install pywin32"],
+        'psutil',
+        ['smtplib', 'py -m pip install secure-smtplib'],
+        ['PIL', 'py -m pip install PILLOW'],
+        'requests',
+        'datetime',
+        'bs4',
+        ['threading', 'py -m pip install thread6'],
+        'suntime',
+        ['zipfile', 'py -m pip install zipfile36 & py -m pip install zipfile38'],
+        ['shutil', 'py -m pip install pytest-shutil'],
+        ['pickle', 'py -m pip install pickle-mixin'],
+    ]
+
+    i = 0
+    install = True
+    while (i < len(importArray)) and (install):
+        # exec("try:\n    import " + importArray[i] + "\n    check.cond = True\nexcept:\n    check.cond = False")
+        if check.cond == False:
+            out = input("Permission to install " + str(importArray[i]) + " (Y/n)? ")
+            if out == "Y":
+                if str(importArray[i])[0] == "[":
+                    os.system(importArray[i][1])
+                else:
+                    os.system("py -m pip install " + importArray[i])
+            else:
+                install = False
+        i = i + 1
+
+    if (install):
+        print("Components Installed!")
+    import json
+    import os
+    import sys
+    from win32api import GetModuleHandle, PostQuitMessage
+    import win32con
+    from win32gui import NIF_ICON, NIF_INFO, NIF_MESSAGE, NIF_TIP, NIM_ADD, NIM_DELETE, NIM_MODIFY, WNDCLASS, CreateWindow, DestroyWindow, LoadIcon, LoadImage, RegisterClass, Shell_NotifyIcon, UpdateWindow
+    import psutil
+    import ssl
+    import smtplib
+    import urllib
+    from PIL import Image
+    from PIL import ImageColor
+    import subprocess
+    import requests
+    from io import BytesIO
+    from urllib.request import urlopen
+    from datetime import datetime
+    import ctypes
+    from bs4 import BeautifulSoup
+    import math as mather
+    import threading
+    from suntime import Sun
+    import datetime as dater
+    from ctypes import *
+    import zipfile
+    import shutil
+    import pickle
+    import xml.etree.ElementTree as ET
 
 # Globals class, used for various functions
 class globals:
@@ -75,6 +147,23 @@ class IO:
         if error != 0:
             jsonData = error
         return jsonData
+        
+    def getXML(path):
+        tree = ET.parse(path)
+        root = tree.getroot()
+        return root
+        
+    def saveXML(path, xml):
+        error = 0
+        try:
+            file = open(path, "w")
+            file.write(ET.tostring(xml).decode('UTF-8'))
+            file.close()
+        except:
+            print("Unexpected error:", sys.exc_info())
+            error = 1
+        return error
+
 
     # saves json object into a file
     def saveJson(path, jsonData):
